@@ -4,8 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { X, ArrowLeft, ArrowRight } from "lucide-react";
+import { X, ArrowLeft, ArrowRight, Languages } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface ProjectWizardProps {
   language: "en" | "fr";
@@ -13,6 +14,7 @@ interface ProjectWizardProps {
 }
 
 const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
+  const [currentLanguage, setCurrentLanguage] = useState<"en" | "fr">(language);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     title: "",
@@ -44,40 +46,41 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
   });
 
   const translations = {
-    title: language === "fr" ? "Titre du projet" : "Project Title",
-    region: language === "fr" ? "Région" : "Region",
-    department: language === "fr" ? "Département" : "Department",
-    address: language === "fr" ? "Adresse du projet" : "Project Address",
-    floor: language === "fr" ? "Etage du projet" : "Project Floor",
-    floorsAbove: language === "fr" ? "Nbr d'étages au dessus" : "Number of Floors Above",
-    next: language === "fr" ? "Suivant" : "Next",
-    previous: language === "fr" ? "Précédent" : "Previous",
-    height: language === "fr" ? "Hauteur de l'ouverture" : "Opening Height",
-    width: language === "fr" ? "Largeur de l'ouverture" : "Opening Width",
-    technician: language === "fr" ? "Technicien" : "Technician",
-    selectOption: language === "fr" ? "Sélectionner une option" : "Select an option",
-    clearance: language === "fr" ? "Allège" : "Clearance",
-    wallWidth: language === "fr" ? "Largeur du mur" : "Wall Width",
-    heightUnderSlab: language === "fr" ? "Hauteur sous dalle" : "Height Under Slab",
-    wallThickness: language === "fr" ? "Epaisseur mur" : "Wall Thickness",
-    thicknessPH: language === "fr" ? "Epaisseur Dalle PH" : "PH Slab Thickness",
-    thicknessPB: language === "fr" ? "Epaisseur Dalle PB" : "PB Slab Thickness",
-    wallType: language === "fr" ? "Type de mur" : "Wall Type",
-    phType: language === "fr" ? "Type de PH" : "PH Type",
-    pbType: language === "fr" ? "Type de PB" : "PB Type",
-    localType: language === "fr" ? "Type de local" : "Local Type",
-    singleSideSlab: language === "fr" ? "Dalle d'un seul côté du mur" : "Single Side Slab",
-    doubleSideSlab: language === "fr" ? "Dalle des deux côtés du mur" : "Double Side Slab",
-    room1Width: language === "fr" ? "Largeur chambre 1" : "Room 1 Width",
-    room1SlabThickness: language === "fr" ? "Epaisseur de la dalle 1" : "Slab 1 Thickness",
-    room1Space: language === "fr" ? "Espace 1 (nature local)" : "Space 1 (room type)",
-    room2Width: language === "fr" ? "Largeur chambre 2" : "Room 2 Width",
-    room2SlabThickness: language === "fr" ? "Epaisseur de la dalle 2" : "Slab 2 Thickness",
-    room2Space: language === "fr" ? "Espace 2 (nature local)" : "Space 2 (room type)",
-    slabEqualsWallThickness: language === "fr" ? "ed1 = eh" : "st1 = wt",
-    yes: language === "fr" ? "oui" : "yes",
-    no: language === "fr" ? "non" : "no",
-    finish: language === "fr" ? "Terminer" : "Finish",
+    title: currentLanguage === "fr" ? "Titre du projet" : "Project Title",
+    region: currentLanguage === "fr" ? "Région" : "Region",
+    department: currentLanguage === "fr" ? "Département" : "Department",
+    address: currentLanguage === "fr" ? "Adresse du projet" : "Project Address",
+    floor: currentLanguage === "fr" ? "Etage du projet" : "Project Floor",
+    floorsAbove: currentLanguage === "fr" ? "Nbr d'étages au dessus" : "Number of Floors Above",
+    next: currentLanguage === "fr" ? "Suivant" : "Next",
+    previous: currentLanguage === "fr" ? "Précédent" : "Previous",
+    height: currentLanguage === "fr" ? "Hauteur de l'ouverture" : "Opening Height",
+    width: currentLanguage === "fr" ? "Largeur de l'ouverture" : "Opening Width",
+    technician: currentLanguage === "fr" ? "Technicien" : "Technician",
+    selectOption: currentLanguage === "fr" ? "Sélectionner une option" : "Select an option",
+    clearance: currentLanguage === "fr" ? "Allège" : "Clearance",
+    wallWidth: currentLanguage === "fr" ? "Largeur du mur" : "Wall Width",
+    heightUnderSlab: currentLanguage === "fr" ? "Hauteur sous dalle" : "Height Under Slab",
+    wallThickness: currentLanguage === "fr" ? "Epaisseur mur" : "Wall Thickness",
+    thicknessPH: currentLanguage === "fr" ? "Epaisseur Dalle PH" : "PH Slab Thickness",
+    thicknessPB: currentLanguage === "fr" ? "Epaisseur Dalle PB" : "PB Slab Thickness",
+    wallType: currentLanguage === "fr" ? "Type de mur" : "Wall Type",
+    phType: currentLanguage === "fr" ? "Type de PH" : "PH Type",
+    pbType: currentLanguage === "fr" ? "Type de PB" : "PB Type",
+    localType: currentLanguage === "fr" ? "Type de local" : "Local Type",
+    singleSideSlab: currentLanguage === "fr" ? "Dalle d'un seul côté du mur" : "Single Side Slab",
+    doubleSideSlab: currentLanguage === "fr" ? "Dalle des deux côtés du mur" : "Double Side Slab",
+    room1Width: currentLanguage === "fr" ? "Largeur chambre 1" : "Room 1 Width",
+    room1SlabThickness: currentLanguage === "fr" ? "Epaisseur de la dalle 1" : "Slab 1 Thickness",
+    room1Space: currentLanguage === "fr" ? "Espace 1 (nature local)" : "Space 1 (room type)",
+    room2Width: currentLanguage === "fr" ? "Largeur chambre 2" : "Room 2 Width",
+    room2SlabThickness: currentLanguage === "fr" ? "Epaisseur de la dalle 2" : "Slab 2 Thickness",
+    room2Space: currentLanguage === "fr" ? "Espace 2 (nature local)" : "Space 2 (room type)",
+    slabEqualsWallThickness: currentLanguage === "fr" ? "ed1 = eh" : "st1 = wt",
+    yes: currentLanguage === "fr" ? "oui" : "yes",
+    no: currentLanguage === "fr" ? "non" : "no",
+    finish: currentLanguage === "fr" ? "Terminer" : "Finish",
+    toggleLanguage: currentLanguage === "fr" ? "Switch to English" : "Passer en Français",
   };
 
   const regions = [
@@ -112,6 +115,10 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const toggleLanguage = () => {
+    setCurrentLanguage(prev => prev === "en" ? "fr" : "en");
+  };
+
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <motion.div
@@ -126,17 +133,27 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
           <div className="glass-panel rounded-xl overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
               <h2 className="text-xl font-semibold text-gray-900">
-                {language === "fr" 
+                {currentLanguage === "fr" 
                   ? "Création de projet" 
                   : "Project Creation"
                 }
               </h2>
-              <button
-                onClick={onClose}
-                className="text-gray-400 hover:text-gray-500 transition-colors"
-              >
-                <X size={20} />
-              </button>
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={toggleLanguage}
+                  className="hover:bg-accent"
+                >
+                  <Languages className="h-4 w-4" />
+                </Button>
+                <button
+                  onClick={onClose}
+                  className="text-gray-400 hover:text-gray-500 transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
 
             <div className="p-6">
@@ -452,20 +469,24 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                     transition={{ duration: 0.2 }}
                     className="space-y-6"
                   >
-                    <RadioGroup
-                      value={formData.slabOption}
-                      onValueChange={(value) => setFormData(prev => ({ ...prev, slabOption: value }))}
-                      className="flex flex-col space-y-4"
-                    >
+                    <div className="space-y-4">
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="single" id="single" />
+                        <Checkbox
+                          id="single"
+                          checked={formData.slabOption === "single"}
+                          onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "single" }))}
+                        />
                         <Label htmlFor="single">{translations.singleSideSlab}</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="double" id="double" />
+                        <Checkbox
+                          id="double"
+                          checked={formData.slabOption === "double"}
+                          onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "double" }))}
+                        />
                         <Label htmlFor="double">{translations.doubleSideSlab}</Label>
                       </div>
-                    </RadioGroup>
+                    </div>
 
                     <div className="grid grid-cols-1 gap-4">
                       <div>
@@ -564,20 +585,16 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
 
                       <div className="flex items-center gap-4">
                         <label className="input-label">{translations.slabEqualsWallThickness}</label>
-                        <RadioGroup
-                          value={formData.slabEqualsWallThickness ? "yes" : "no"}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, slabEqualsWallThickness: value === "yes" }))}
-                          className="flex gap-4"
-                        >
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="yes" id="eq-yes" />
-                            <Label htmlFor="eq-yes">{translations.yes}</Label>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="no" id="eq-no" />
-                            <Label htmlFor="eq-no">{translations.no}</Label>
-                          </div>
-                        </RadioGroup>
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="eq-yes"
+                            checked={formData.slabEqualsWallThickness}
+                            onCheckedChange={(checked) => 
+                              setFormData(prev => ({ ...prev, slabEqualsWallThickness: checked === true }))
+                            }
+                          />
+                          <Label htmlFor="eq-yes">{translations.yes}</Label>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -596,7 +613,7 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
               >
                 <ArrowLeft size={16} />
                 {step === 1 ? (
-                  language === "fr" ? "Fermer" : "Close"
+                  currentLanguage === "fr" ? "Fermer" : "Close"
                 ) : (
                   translations.previous
                 )}
