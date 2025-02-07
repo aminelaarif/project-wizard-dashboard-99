@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -48,6 +47,16 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
     width: language === "fr" ? "Largeur de l'ouverture" : "Opening Width",
     technician: language === "fr" ? "Technicien" : "Technician",
     selectOption: language === "fr" ? "Sélectionner une option" : "Select an option",
+    clearance: language === "fr" ? "Allège" : "Clearance",
+    wallWidth: language === "fr" ? "Largeur du mur" : "Wall Width",
+    heightUnderSlab: language === "fr" ? "Hauteur sous dalle" : "Height Under Slab",
+    wallThickness: language === "fr" ? "Epaisseur mur" : "Wall Thickness",
+    thicknessPH: language === "fr" ? "Epaisseur Dalle PH" : "PH Slab Thickness",
+    thicknessPB: language === "fr" ? "Epaisseur Dalle PB" : "PB Slab Thickness",
+    wallType: language === "fr" ? "Type de mur" : "Wall Type",
+    phType: language === "fr" ? "Type de PH" : "PH Type",
+    pbType: language === "fr" ? "Type de PB" : "PB Type",
+    localType: language === "fr" ? "Type de local" : "Local Type",
   };
 
   const regions = [
@@ -247,8 +256,162 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4">
-                      {/* Add all the technical specifications inputs */}
-                      {/* For brevity, I'm showing just a couple */}
+                      <div>
+                        <label className="input-label">
+                          {translations.clearance} (cm)
+                        </label>
+                        <Input
+                          name="clearance"
+                          value={formData.clearance}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          type="number"
+                        />
+                      </div>
+                      <div>
+                        <label className="input-label">
+                          {translations.wallWidth} (cm)
+                        </label>
+                        <Input
+                          name="wallWidth"
+                          value={formData.wallWidth}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="input-label">
+                          {translations.heightUnderSlab} (cm)
+                        </label>
+                        <Input
+                          name="heightUnderSlab"
+                          value={formData.heightUnderSlab}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          type="number"
+                        />
+                      </div>
+                      <div>
+                        <label className="input-label">
+                          {translations.wallThickness} (cm)
+                        </label>
+                        <Input
+                          name="wallThickness"
+                          value={formData.wallThickness}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="input-label">
+                          {translations.thicknessPH} (cm)
+                        </label>
+                        <Input
+                          name="thicknessPH"
+                          value={formData.thicknessPH}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          type="number"
+                        />
+                      </div>
+                      <div>
+                        <label className="input-label">
+                          {translations.thicknessPB} (cm)
+                        </label>
+                        <Input
+                          name="thicknessPB"
+                          value={formData.thicknessPB}
+                          onChange={handleInputChange}
+                          className="form-input"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div>
+                        <label className="input-label">
+                          {translations.wallType}
+                        </label>
+                        <Select
+                          value={formData.wallType}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, wallType: value }))}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={translations.selectOption} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="type1">Type 1</SelectItem>
+                            <SelectItem value="type2">Type 2</SelectItem>
+                            <SelectItem value="type3">Type 3</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <label className="input-label">
+                          {translations.phType}
+                        </label>
+                        <Select
+                          value={formData.phType}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, phType: value }))}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={translations.selectOption} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="type1">Type 1</SelectItem>
+                            <SelectItem value="type2">Type 2</SelectItem>
+                            <SelectItem value="type3">Type 3</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <label className="input-label">
+                          {translations.pbType}
+                        </label>
+                        <Select
+                          value={formData.pbType}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, pbType: value }))}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={translations.selectOption} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="type1">Type 1</SelectItem>
+                            <SelectItem value="type2">Type 2</SelectItem>
+                            <SelectItem value="type3">Type 3</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div>
+                        <label className="input-label">
+                          {translations.localType}
+                        </label>
+                        <Select
+                          value={formData.localType}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, localType: value }))}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={translations.selectOption} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="type1">Type 1</SelectItem>
+                            <SelectItem value="type2">Type 2</SelectItem>
+                            <SelectItem value="type3">Type 3</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
 
                     <Button
@@ -297,4 +460,3 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
 };
 
 export default ProjectWizard;
-
