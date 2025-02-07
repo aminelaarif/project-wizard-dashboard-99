@@ -263,329 +263,132 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                     transition={{ duration: 0.2 }}
                     className="space-y-6"
                   >
-                    <div className="aspect-video w-full bg-gray-100 rounded-lg overflow-hidden mb-6">
-                      <img 
-                        src="/lovable-uploads/f533125c-12ae-4b4e-af3e-5edc28551bc0.png" 
-                        alt="Project visualization"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="input-label">
-                          {translations.height} (cm)
-                        </label>
-                        <Input
-                          name="height"
-                          value={formData.height}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
+                    <div className="flex gap-6">
+                      <div className="w-1/3 bg-gray-100 rounded-lg overflow-hidden">
+                        <img 
+                          src="/lovable-uploads/f533125c-12ae-4b4e-af3e-5edc28551bc0.png" 
+                          alt="Project visualization"
+                          className="w-full h-full object-contain"
                         />
                       </div>
-                      <div>
-                        <label className="input-label">
-                          {translations.width} (cm)
-                        </label>
-                        <Input
-                          name="width"
-                          value={formData.width}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="input-label">
-                          {translations.clearance} (cm)
-                        </label>
-                        <Input
-                          name="clearance"
-                          value={formData.clearance}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
-                        />
-                      </div>
-                      <div>
-                        <label className="input-label">
-                          {translations.wallWidth} (cm)
-                        </label>
-                        <Input
-                          name="wallWidth"
-                          value={formData.wallWidth}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="input-label">
-                          {translations.heightUnderSlab} (cm)
-                        </label>
-                        <Input
-                          name="heightUnderSlab"
-                          value={formData.heightUnderSlab}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
-                        />
-                      </div>
-                      <div>
-                        <label className="input-label">
-                          {translations.wallThickness} (cm)
-                        </label>
-                        <Input
-                          name="wallThickness"
-                          value={formData.wallThickness}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="input-label">
-                          {translations.thicknessPH} (cm)
-                        </label>
-                        <Input
-                          name="thicknessPH"
-                          value={formData.thicknessPH}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
-                        />
-                      </div>
-                      <div>
-                        <label className="input-label">
-                          {translations.thicknessPB} (cm)
-                        </label>
-                        <Input
-                          name="thicknessPB"
-                          value={formData.thicknessPB}
-                          onChange={handleInputChange}
-                          className="form-input"
-                          type="number"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div>
-                        <label className="input-label">
-                          {translations.wallType}
-                        </label>
-                        <Select
-                          value={formData.wallType}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, wallType: value }))}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={translations.selectOption} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="type1">Type 1</SelectItem>
-                            <SelectItem value="type2">Type 2</SelectItem>
-                            <SelectItem value="type3">Type 3</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div>
-                        <label className="input-label">
-                          {translations.phType}
-                        </label>
-                        <Select
-                          value={formData.phType}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, phType: value }))}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={translations.selectOption} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="type1">Type 1</SelectItem>
-                            <SelectItem value="type2">Type 2</SelectItem>
-                            <SelectItem value="type3">Type 3</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div>
-                        <label className="input-label">
-                          {translations.pbType}
-                        </label>
-                        <Select
-                          value={formData.pbType}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, pbType: value }))}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={translations.selectOption} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="type1">Type 1</SelectItem>
-                            <SelectItem value="type2">Type 2</SelectItem>
-                            <SelectItem value="type3">Type 3</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div>
-                        <label className="input-label">
-                          {translations.localType}
-                        </label>
-                        <Select
-                          value={formData.localType}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, localType: value }))}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={translations.selectOption} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="type1">Type 1</SelectItem>
-                            <SelectItem value="type2">Type 2</SelectItem>
-                            <SelectItem value="type3">Type 3</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    <Button
-                      variant="outline"
-                      className="w-full mt-4"
-                      onClick={() => {
-                        // Handle technician contact
-                      }}
-                    >
-                      {translations.technician}
-                    </Button>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="step3"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                    className="space-y-6"
-                  >
-                    <div className="aspect-video w-full bg-gray-100 rounded-lg overflow-hidden mb-6">
-                      <img 
-                        src="/lovable-uploads/f533125c-12ae-4b4e-af3e-5edc28551bc0.png" 
-                        alt="Project visualization"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="single"
-                          checked={formData.slabOption === "single"}
-                          onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "single" }))}
-                          className="h-5 w-5"
-                        />
-                        <Label htmlFor="single">{translations.singleSideSlab}</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Checkbox 
-                          id="double"
-                          checked={formData.slabOption === "double"}
-                          onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "double" }))}
-                          className="h-5 w-5"
-                        />
-                        <Label htmlFor="double">{translations.doubleSideSlab}</Label>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-4">
-                      <div>
-                        <label className="input-label">{translations.room1Width}</label>
-                        <div className="flex items-center gap-2">
-                          <Input
-                            name="room1Width"
-                            value={formData.room1Width}
-                            onChange={handleInputChange}
-                            type="number"
-                            className="form-input"
-                          />
-                          <span>cm</span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="input-label">{translations.room1SlabThickness}</label>
-                        <div className="flex items-center gap-2">
-                          <Input
-                            name="room1SlabThickness"
-                            value={formData.room1SlabThickness}
-                            onChange={handleInputChange}
-                            type="number"
-                            className="form-input"
-                          />
-                          <span>cm</span>
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="input-label">{translations.room1Space}</label>
-                        <Select
-                          value={formData.room1Space}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, room1Space: value }))}
-                        >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder={translations.selectOption} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="type1">Type 1</SelectItem>
-                            <SelectItem value="type2">Type 2</SelectItem>
-                            <SelectItem value="type3">Type 3</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      {formData.slabOption === "double" && (
-                        <>
+                      
+                      <div className="w-2/3 space-y-6">
+                        <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="input-label">{translations.room2Width}</label>
-                            <div className="flex items-center gap-2">
-                              <Input
-                                name="room2Width"
-                                value={formData.room2Width}
-                                onChange={handleInputChange}
-                                type="number"
-                                className="form-input"
-                              />
-                              <span>cm</span>
-                            </div>
+                            <label className="input-label">
+                              {translations.height} (cm)
+                            </label>
+                            <Input
+                              name="height"
+                              value={formData.height}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
                           </div>
-
                           <div>
-                            <label className="input-label">{translations.room2SlabThickness}</label>
-                            <div className="flex items-center gap-2">
-                              <Input
-                                name="room2SlabThickness"
-                                value={formData.room2SlabThickness}
-                                onChange={handleInputChange}
-                                type="number"
-                                className="form-input"
-                              />
-                              <span>cm</span>
-                            </div>
+                            <label className="input-label">
+                              {translations.width} (cm)
+                            </label>
+                            <Input
+                              name="width"
+                              value={formData.width}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
                           </div>
-
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label className="input-label">{translations.room2Space}</label>
+                            <label className="input-label">
+                              {translations.clearance} (cm)
+                            </label>
+                            <Input
+                              name="clearance"
+                              value={formData.clearance}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
+                          </div>
+                          <div>
+                            <label className="input-label">
+                              {translations.wallWidth} (cm)
+                            </label>
+                            <Input
+                              name="wallWidth"
+                              value={formData.wallWidth}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="input-label">
+                              {translations.heightUnderSlab} (cm)
+                            </label>
+                            <Input
+                              name="heightUnderSlab"
+                              value={formData.heightUnderSlab}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
+                          </div>
+                          <div>
+                            <label className="input-label">
+                              {translations.wallThickness} (cm)
+                            </label>
+                            <Input
+                              name="wallThickness"
+                              value={formData.wallThickness}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="input-label">
+                              {translations.thicknessPH} (cm)
+                            </label>
+                            <Input
+                              name="thicknessPH"
+                              value={formData.thicknessPH}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
+                          </div>
+                          <div>
+                            <label className="input-label">
+                              {translations.thicknessPB} (cm)
+                            </label>
+                            <Input
+                              name="thicknessPB"
+                              value={formData.thicknessPB}
+                              onChange={handleInputChange}
+                              className="form-input"
+                              type="number"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-4">
+                          <div>
+                            <label className="input-label">
+                              {translations.wallType}
+                            </label>
                             <Select
-                              value={formData.room2Space}
-                              onValueChange={(value) => setFormData(prev => ({ ...prev, room2Space: value }))}
+                              value={formData.wallType}
+                              onValueChange={(value) => setFormData(prev => ({ ...prev, wallType: value }))}
                             >
                               <SelectTrigger className="w-full">
                                 <SelectValue placeholder={translations.selectOption} />
@@ -597,21 +400,226 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                               </SelectContent>
                             </Select>
                           </div>
-                        </>
-                      )}
 
-                      <div className="flex items-center gap-4">
-                        <label className="input-label">{translations.slabEqualsWallThickness}</label>
-                        <div className="flex items-center space-x-2">
-                          <Checkbox
-                            id="eq-yes"
-                            checked={formData.slabEqualsWallThickness}
-                            onCheckedChange={(checked) => 
-                              setFormData(prev => ({ ...prev, slabEqualsWallThickness: checked === true }))
-                            }
-                            className="h-5 w-5"
-                          />
-                          <Label htmlFor="eq-yes">{translations.yes}</Label>
+                          <div>
+                            <label className="input-label">
+                              {translations.phType}
+                            </label>
+                            <Select
+                              value={formData.phType}
+                              onValueChange={(value) => setFormData(prev => ({ ...prev, phType: value }))}
+                            >
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder={translations.selectOption} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="type1">Type 1</SelectItem>
+                                <SelectItem value="type2">Type 2</SelectItem>
+                                <SelectItem value="type3">Type 3</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div>
+                            <label className="input-label">
+                              {translations.pbType}
+                            </label>
+                            <Select
+                              value={formData.pbType}
+                              onValueChange={(value) => setFormData(prev => ({ ...prev, pbType: value }))}
+                            >
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder={translations.selectOption} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="type1">Type 1</SelectItem>
+                                <SelectItem value="type2">Type 2</SelectItem>
+                                <SelectItem value="type3">Type 3</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div>
+                            <label className="input-label">
+                              {translations.localType}
+                            </label>
+                            <Select
+                              value={formData.localType}
+                              onValueChange={(value) => setFormData(prev => ({ ...prev, localType: value }))}
+                            >
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder={translations.selectOption} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="type1">Type 1</SelectItem>
+                                <SelectItem value="type2">Type 2</SelectItem>
+                                <SelectItem value="type3">Type 3</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <Button
+                          variant="outline"
+                          className="w-full mt-4"
+                          onClick={() => {
+                            // Handle technician contact
+                          }}
+                        >
+                          {translations.technician}
+                        </Button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="step3"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.2 }}
+                    className="space-y-6"
+                  >
+                    <div className="flex gap-6">
+                      <div className="w-1/3 bg-gray-100 rounded-lg overflow-hidden">
+                        <img 
+                          src="/lovable-uploads/f533125c-12ae-4b4e-af3e-5edc28551bc0.png" 
+                          alt="Project visualization"
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      
+                      <div className="w-2/3 space-y-6">
+                        <div className="space-y-4">
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="single"
+                              checked={formData.slabOption === "single"}
+                              onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "single" }))}
+                              className="h-5 w-5"
+                            />
+                            <Label htmlFor="single">{translations.singleSideSlab}</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox 
+                              id="double"
+                              checked={formData.slabOption === "double"}
+                              onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "double" }))}
+                              className="h-5 w-5"
+                            />
+                            <Label htmlFor="double">{translations.doubleSideSlab}</Label>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
+                          <div>
+                            <label className="input-label">{translations.room1Width}</label>
+                            <div className="flex items-center gap-2">
+                              <Input
+                                name="room1Width"
+                                value={formData.room1Width}
+                                onChange={handleInputChange}
+                                type="number"
+                                className="form-input"
+                              />
+                              <span>cm</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="input-label">{translations.room1SlabThickness}</label>
+                            <div className="flex items-center gap-2">
+                              <Input
+                                name="room1SlabThickness"
+                                value={formData.room1SlabThickness}
+                                onChange={handleInputChange}
+                                type="number"
+                                className="form-input"
+                              />
+                              <span>cm</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="input-label">{translations.room1Space}</label>
+                            <Select
+                              value={formData.room1Space}
+                              onValueChange={(value) => setFormData(prev => ({ ...prev, room1Space: value }))}
+                            >
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder={translations.selectOption} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="type1">Type 1</SelectItem>
+                                <SelectItem value="type2">Type 2</SelectItem>
+                                <SelectItem value="type3">Type 3</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          {formData.slabOption === "double" && (
+                            <>
+                              <div>
+                                <label className="input-label">{translations.room2Width}</label>
+                                <div className="flex items-center gap-2">
+                                  <Input
+                                    name="room2Width"
+                                    value={formData.room2Width}
+                                    onChange={handleInputChange}
+                                    type="number"
+                                    className="form-input"
+                                  />
+                                  <span>cm</span>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label className="input-label">{translations.room2SlabThickness}</label>
+                                <div className="flex items-center gap-2">
+                                  <Input
+                                    name="room2SlabThickness"
+                                    value={formData.room2SlabThickness}
+                                    onChange={handleInputChange}
+                                    type="number"
+                                    className="form-input"
+                                  />
+                                  <span>cm</span>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label className="input-label">{translations.room2Space}</label>
+                                <Select
+                                  value={formData.room2Space}
+                                  onValueChange={(value) => setFormData(prev => ({ ...prev, room2Space: value }))}
+                                >
+                                  <SelectTrigger className="w-full">
+                                    <SelectValue placeholder={translations.selectOption} />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="type1">Type 1</SelectItem>
+                                    <SelectItem value="type2">Type 2</SelectItem>
+                                    <SelectItem value="type3">Type 3</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </div>
+                            </>
+                          )}
+
+                          <div className="flex items-center gap-4">
+                            <label className="input-label">{translations.slabEqualsWallThickness}</label>
+                            <div className="flex items-center space-x-2">
+                              <Checkbox
+                                id="eq-yes"
+                                checked={formData.slabEqualsWallThickness}
+                                onCheckedChange={(checked) => 
+                                  setFormData(prev => ({ ...prev, slabEqualsWallThickness: checked === true }))
+                                }
+                                className="h-5 w-5"
+                              />
+                              <Label htmlFor="eq-yes">{translations.yes}</Label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
