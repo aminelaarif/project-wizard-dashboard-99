@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { X, ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -19,7 +21,6 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
     address: "",
     floor: "",
     floorsAbove: "",
-    // Technical specs
     height: "",
     width: "",
     clearance: "",
@@ -32,6 +33,14 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
     phType: "",
     pbType: "",
     localType: "",
+    slabOption: "single",
+    room1Width: "",
+    room1SlabThickness: "",
+    room1Space: "",
+    room2Width: "",
+    room2SlabThickness: "",
+    room2Space: "",
+    slabEqualsWallThickness: false,
   });
 
   const translations = {
@@ -57,6 +66,18 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
     phType: language === "fr" ? "Type de PH" : "PH Type",
     pbType: language === "fr" ? "Type de PB" : "PB Type",
     localType: language === "fr" ? "Type de local" : "Local Type",
+    singleSideSlab: language === "fr" ? "Dalle d'un seul côté du mur" : "Single Side Slab",
+    doubleSideSlab: language === "fr" ? "Dalle des deux côtés du mur" : "Double Side Slab",
+    room1Width: language === "fr" ? "Largeur chambre 1" : "Room 1 Width",
+    room1SlabThickness: language === "fr" ? "Epaisseur de la dalle 1" : "Slab 1 Thickness",
+    room1Space: language === "fr" ? "Espace 1 (nature local)" : "Space 1 (room type)",
+    room2Width: language === "fr" ? "Largeur chambre 2" : "Room 2 Width",
+    room2SlabThickness: language === "fr" ? "Epaisseur de la dalle 2" : "Slab 2 Thickness",
+    room2Space: language === "fr" ? "Espace 2 (nature local)" : "Space 2 (room type)",
+    slabEqualsWallThickness: language === "fr" ? "ed1 = eh" : "st1 = wt",
+    yes: language === "fr" ? "oui" : "yes",
+    no: language === "fr" ? "non" : "no",
+    finish: language === "fr" ? "Terminer" : "Finish",
   };
 
   const regions = [
@@ -103,7 +124,6 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
       >
         <div className="relative mx-auto max-w-2xl">
           <div className="glass-panel rounded-xl overflow-hidden">
-            {/* Header */}
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
               <h2 className="text-xl font-semibold text-gray-900">
                 {language === "fr" 
@@ -119,7 +139,6 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
               </button>
             </div>
 
-            {/* Content */}
             <div className="p-6">
               <AnimatePresence mode="wait">
                 {step === 1 ? (
@@ -219,7 +238,7 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                       </div>
                     </div>
                   </motion.div>
-                ) : (
+                ) : step === 2 ? (
                   <motion.div
                     key="step2"
                     initial={{ opacity: 0, x: 20 }}
@@ -424,15 +443,155 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                       {translations.technician}
                     </Button>
                   </motion.div>
+                ) : (
+                  <motion.div
+                    key="step3"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.2 }}
+                    className="space-y-6"
+                  >
+                    <RadioGroup
+                      value={formData.slabOption}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, slabOption: value }))}
+                      className="flex flex-col space-y-4"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="single" id="single" />
+                        <Label htmlFor="single">{translations.singleSideSlab}</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="double" id="double" />
+                        <Label htmlFor="double">{translations.doubleSideSlab}</Label>
+                      </div>
+                    </RadioGroup>
+
+                    <div className="grid grid-cols-1 gap-4">
+                      <div>
+                        <label className="input-label">{translations.room1Width}</label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            name="room1Width"
+                            value={formData.room1Width}
+                            onChange={handleInputChange}
+                            type="number"
+                            className="form-input"
+                          />
+                          <span>cm</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="input-label">{translations.room1SlabThickness}</label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            name="room1SlabThickness"
+                            value={formData.room1SlabThickness}
+                            onChange={handleInputChange}
+                            type="number"
+                            className="form-input"
+                          />
+                          <span>cm</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="input-label">{translations.room1Space}</label>
+                        <Select
+                          value={formData.room1Space}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, room1Space: value }))}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={translations.selectOption} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="type1">Type 1</SelectItem>
+                            <SelectItem value="type2">Type 2</SelectItem>
+                            <SelectItem value="type3">Type 3</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {formData.slabOption === "double" && (
+                        <>
+                          <div>
+                            <label className="input-label">{translations.room2Width}</label>
+                            <div className="flex items-center gap-2">
+                              <Input
+                                name="room2Width"
+                                value={formData.room2Width}
+                                onChange={handleInputChange}
+                                type="number"
+                                className="form-input"
+                              />
+                              <span>cm</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="input-label">{translations.room2SlabThickness}</label>
+                            <div className="flex items-center gap-2">
+                              <Input
+                                name="room2SlabThickness"
+                                value={formData.room2SlabThickness}
+                                onChange={handleInputChange}
+                                type="number"
+                                className="form-input"
+                              />
+                              <span>cm</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="input-label">{translations.room2Space}</label>
+                            <Select
+                              value={formData.room2Space}
+                              onValueChange={(value) => setFormData(prev => ({ ...prev, room2Space: value }))}
+                            >
+                              <SelectTrigger className="w-full">
+                                <SelectValue placeholder={translations.selectOption} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="type1">Type 1</SelectItem>
+                                <SelectItem value="type2">Type 2</SelectItem>
+                                <SelectItem value="type3">Type 3</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </>
+                      )}
+
+                      <div className="flex items-center gap-4">
+                        <label className="input-label">{translations.slabEqualsWallThickness}</label>
+                        <RadioGroup
+                          value={formData.slabEqualsWallThickness ? "yes" : "no"}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, slabEqualsWallThickness: value === "yes" }))}
+                          className="flex gap-4"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="yes" id="eq-yes" />
+                            <Label htmlFor="eq-yes">{translations.yes}</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="no" id="eq-no" />
+                            <Label htmlFor="eq-no">{translations.no}</Label>
+                          </div>
+                        </RadioGroup>
+                      </div>
+                    </div>
+                  </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* Footer */}
             <div className="px-6 py-4 border-t border-gray-200 flex justify-between">
               <Button
                 variant="outline"
-                onClick={() => step === 1 ? onClose() : setStep(1)}
+                onClick={() => {
+                  if (step === 1) onClose();
+                  else setStep(prev => prev - 1);
+                }}
                 className="flex items-center gap-2"
               >
                 <ArrowLeft size={16} />
@@ -443,13 +602,14 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                 )}
               </Button>
               <Button
-                onClick={() => step === 1 ? setStep(2) : console.log('Submit')}
+                onClick={() => {
+                  if (step < 3) setStep(prev => prev + 1);
+                  else console.log('Submit', formData);
+                }}
                 className="flex items-center gap-2"
               >
-                {step === 1 ? translations.next : (
-                  language === "fr" ? "Terminer" : "Finish"
-                )}
-                {step === 1 && <ArrowRight size={16} />}
+                {step < 3 ? translations.next : translations.finish}
+                {step < 3 && <ArrowRight size={16} />}
               </Button>
             </div>
           </div>
