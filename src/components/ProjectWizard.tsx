@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { X, ArrowLeft, ArrowRight, Languages } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -264,6 +263,14 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                     transition={{ duration: 0.2 }}
                     className="space-y-6"
                   >
+                    <div className="aspect-video w-full bg-gray-100 rounded-lg overflow-hidden mb-6">
+                      <img 
+                        src="/lovable-uploads/f533125c-12ae-4b4e-af3e-5edc28551bc0.png" 
+                        alt="Project visualization"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="input-label">
@@ -469,20 +476,30 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                     transition={{ duration: 0.2 }}
                     className="space-y-6"
                   >
+                    <div className="aspect-video w-full bg-gray-100 rounded-lg overflow-hidden mb-6">
+                      <img 
+                        src="/lovable-uploads/f533125c-12ae-4b4e-af3e-5edc28551bc0.png" 
+                        alt="Project visualization"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+
                     <div className="space-y-4">
                       <div className="flex items-center space-x-2">
-                        <Checkbox
+                        <Checkbox 
                           id="single"
                           checked={formData.slabOption === "single"}
                           onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "single" }))}
+                          className="h-5 w-5"
                         />
                         <Label htmlFor="single">{translations.singleSideSlab}</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <Checkbox
+                        <Checkbox 
                           id="double"
                           checked={formData.slabOption === "double"}
                           onCheckedChange={() => setFormData(prev => ({ ...prev, slabOption: "double" }))}
+                          className="h-5 w-5"
                         />
                         <Label htmlFor="double">{translations.doubleSideSlab}</Label>
                       </div>
@@ -592,6 +609,7 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                             onCheckedChange={(checked) => 
                               setFormData(prev => ({ ...prev, slabEqualsWallThickness: checked === true }))
                             }
+                            className="h-5 w-5"
                           />
                           <Label htmlFor="eq-yes">{translations.yes}</Label>
                         </div>
