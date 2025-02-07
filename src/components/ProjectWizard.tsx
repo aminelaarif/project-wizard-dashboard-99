@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { X, ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -47,7 +47,35 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
     height: language === "fr" ? "Hauteur de l'ouverture" : "Opening Height",
     width: language === "fr" ? "Largeur de l'ouverture" : "Opening Width",
     technician: language === "fr" ? "Technicien" : "Technician",
+    selectOption: language === "fr" ? "Sélectionner une option" : "Select an option",
   };
+
+  const regions = [
+    { value: "ile-de-france", label: "Île-de-France" },
+    { value: "auvergne-rhone-alpes", label: "Auvergne-Rhône-Alpes" },
+    { value: "bourgogne-franche-comte", label: "Bourgogne-Franche-Comté" },
+    { value: "bretagne", label: "Bretagne" },
+    { value: "centre-val-de-loire", label: "Centre-Val de Loire" },
+    { value: "grand-est", label: "Grand Est" },
+    { value: "hauts-de-france", label: "Hauts-de-France" },
+    { value: "normandie", label: "Normandie" },
+    { value: "nouvelle-aquitaine", label: "Nouvelle-Aquitaine" },
+    { value: "occitanie", label: "Occitanie" },
+    { value: "pays-de-la-loire", label: "Pays de la Loire" },
+    { value: "provence-alpes-cote-dazur", label: "Provence-Alpes-Côte d'Azur" },
+    { value: "corse", label: "Corse" },
+  ];
+
+  const departments = [
+    { value: "75", label: "Paris (75)" },
+    { value: "77", label: "Seine-et-Marne (77)" },
+    { value: "78", label: "Yvelines (78)" },
+    { value: "91", label: "Essonne (91)" },
+    { value: "92", label: "Hauts-de-Seine (92)" },
+    { value: "93", label: "Seine-Saint-Denis (93)" },
+    { value: "94", label: "Val-de-Marne (94)" },
+    { value: "95", label: "Val-d'Oise (95)" },
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -109,20 +137,40 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
                         <label className="input-label">
                           {translations.region}
                         </label>
-                        <Select onValueChange={(value) => handleInputChange({ target: { name: "region", value }} as any)}>
-                          <option value="">Select...</option>
-                          <option value="ile-de-france">Île-de-France</option>
-                          <option value="provence">Provence-Alpes-Côte d'Azur</option>
+                        <Select
+                          value={formData.region}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, region: value }))}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={translations.selectOption} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {regions.map((region) => (
+                              <SelectItem key={region.value} value={region.value}>
+                                {region.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
                         </Select>
                       </div>
                       <div>
                         <label className="input-label">
                           {translations.department}
                         </label>
-                        <Select onValueChange={(value) => handleInputChange({ target: { name: "department", value }} as any)}>
-                          <option value="">Select...</option>
-                          <option value="75">Paris (75)</option>
-                          <option value="77">Seine-et-Marne (77)</option>
+                        <Select
+                          value={formData.department}
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder={translations.selectOption} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {departments.map((department) => (
+                              <SelectItem key={department.value} value={department.value}>
+                                {department.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
                         </Select>
                       </div>
                       <div>
@@ -249,3 +297,4 @@ const ProjectWizard = ({ language, onClose }: ProjectWizardProps) => {
 };
 
 export default ProjectWizard;
+
